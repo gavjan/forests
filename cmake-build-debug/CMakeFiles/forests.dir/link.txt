@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/forests.dir/src/main.c.o CMakeFiles/forests.dir/src/trie.c.o  -o forests 
