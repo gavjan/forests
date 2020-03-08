@@ -54,11 +54,13 @@ CMAKE_BINARY_DIR = /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug
 
 # The main recursive "all" target.
 all: CMakeFiles/forests.dir/all
+all: CMakeFiles/ref.dir/all
 
 .PHONY : all
 
 # The main recursive "clean" target.
 clean: CMakeFiles/forests.dir/clean
+clean: CMakeFiles/ref.dir/clean
 
 .PHONY : clean
 
@@ -74,12 +76,12 @@ preinstall:
 CMakeFiles/forests.dir/all:
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/depend
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target forests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target forests"
 .PHONY : CMakeFiles/forests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/forests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/forests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/forests.dir/rule
@@ -93,6 +95,33 @@ forests: CMakeFiles/forests.dir/rule
 CMakeFiles/forests.dir/clean:
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/clean
 .PHONY : CMakeFiles/forests.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ref.dir
+
+# All Build rule for target.
+CMakeFiles/ref.dir/all:
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/depend
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target ref"
+.PHONY : CMakeFiles/ref.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ref.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ref.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/ref.dir/rule
+
+# Convenience name for target.
+ref: CMakeFiles/ref.dir/rule
+
+.PHONY : ref
+
+# clean rule for target.
+CMakeFiles/ref.dir/clean:
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/clean
+.PHONY : CMakeFiles/ref.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

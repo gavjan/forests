@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/cgev/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5662.56/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/cgev/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/193.5662.56/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -123,59 +123,153 @@ forests/fast:
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/build
 .PHONY : forests/fast
 
-src/main.o: src/main.c.o
+#=============================================================================
+# Target rules for targets named ref
 
-.PHONY : src/main.o
+# Build rule for target.
+ref: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ref
+.PHONY : ref
 
-# target to build an object file
-src/main.c.o:
-	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/src/main.c.o
-.PHONY : src/main.c.o
+# fast build rule for target.
+ref/fast:
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/build
+.PHONY : ref/fast
 
-src/main.i: src/main.c.i
+main.o: main.c.o
 
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.c.i:
-	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/src/main.c.i
-.PHONY : src/main.c.i
-
-src/main.s: src/main.c.s
-
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/src/main.c.s
-.PHONY : src/main.c.s
-
-src/trie.o: src/trie.c.o
-
-.PHONY : src/trie.o
+.PHONY : main.o
 
 # target to build an object file
-src/trie.c.o:
-	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/src/trie.c.o
-.PHONY : src/trie.c.o
+main.c.o:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/main.c.o
+.PHONY : main.c.o
 
-src/trie.i: src/trie.c.i
+main.i: main.c.i
 
-.PHONY : src/trie.i
+.PHONY : main.i
 
 # target to preprocess a source file
-src/trie.c.i:
-	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/src/trie.c.i
-.PHONY : src/trie.c.i
+main.c.i:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/main.c.i
+.PHONY : main.c.i
 
-src/trie.s: src/trie.c.s
+main.s: main.c.s
 
-.PHONY : src/trie.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-src/trie.c.s:
-	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/src/trie.c.s
-.PHONY : src/trie.c.s
+main.c.s:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/main.c.s
+.PHONY : main.c.s
+
+parser.o: parser.c.o
+
+.PHONY : parser.o
+
+# target to build an object file
+parser.c.o:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/parser.c.o
+.PHONY : parser.c.o
+
+parser.i: parser.c.i
+
+.PHONY : parser.i
+
+# target to preprocess a source file
+parser.c.i:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/parser.c.i
+.PHONY : parser.c.i
+
+parser.s: parser.c.s
+
+.PHONY : parser.s
+
+# target to generate assembly for a file
+parser.c.s:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/parser.c.s
+.PHONY : parser.c.s
+
+ref.o: ref.c.o
+
+.PHONY : ref.o
+
+# target to build an object file
+ref.c.o:
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/ref.c.o
+.PHONY : ref.c.o
+
+ref.i: ref.c.i
+
+.PHONY : ref.i
+
+# target to preprocess a source file
+ref.c.i:
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/ref.c.i
+.PHONY : ref.c.i
+
+ref.s: ref.c.s
+
+.PHONY : ref.s
+
+# target to generate assembly for a file
+ref.c.s:
+	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/ref.c.s
+.PHONY : ref.c.s
+
+safe_malloc.o: safe_malloc.c.o
+
+.PHONY : safe_malloc.o
+
+# target to build an object file
+safe_malloc.c.o:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/safe_malloc.c.o
+.PHONY : safe_malloc.c.o
+
+safe_malloc.i: safe_malloc.c.i
+
+.PHONY : safe_malloc.i
+
+# target to preprocess a source file
+safe_malloc.c.i:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/safe_malloc.c.i
+.PHONY : safe_malloc.c.i
+
+safe_malloc.s: safe_malloc.c.s
+
+.PHONY : safe_malloc.s
+
+# target to generate assembly for a file
+safe_malloc.c.s:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/safe_malloc.c.s
+.PHONY : safe_malloc.c.s
+
+trie.o: trie.c.o
+
+.PHONY : trie.o
+
+# target to build an object file
+trie.c.o:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/trie.c.o
+.PHONY : trie.c.o
+
+trie.i: trie.c.i
+
+.PHONY : trie.i
+
+# target to preprocess a source file
+trie.c.i:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/trie.c.i
+.PHONY : trie.c.i
+
+trie.s: trie.c.s
+
+.PHONY : trie.s
+
+# target to generate assembly for a file
+trie.c.s:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/trie.c.s
+.PHONY : trie.c.s
 
 # Help Target
 help:
@@ -183,15 +277,25 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... forests"
 	@echo "... edit_cache"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
-	@echo "... src/trie.o"
-	@echo "... src/trie.i"
-	@echo "... src/trie.s"
+	@echo "... forests"
+	@echo "... rebuild_cache"
+	@echo "... ref"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... parser.o"
+	@echo "... parser.i"
+	@echo "... parser.s"
+	@echo "... ref.o"
+	@echo "... ref.i"
+	@echo "... ref.s"
+	@echo "... safe_malloc.o"
+	@echo "... safe_malloc.i"
+	@echo "... safe_malloc.s"
+	@echo "... trie.o"
+	@echo "... trie.i"
+	@echo "... trie.s"
 .PHONY : help
 
 
