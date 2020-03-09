@@ -1,4 +1,11 @@
-// Reference file
+// [IPP] Małe Zadanie(Small Task), Gevorg Chobanyan 401929
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <values.h>
+#include <errno.h>
+#include "trie.h"
+
 #define CHAR_SIZE 4
 #define MAX_WORD 8
 #define NO_DIFF 0
@@ -8,6 +15,24 @@
 #define BAD_INPUT 0
 #define NO_ENERGY 0
 #define BASE_TEN 10
+
+void err(/*int code*/) {
+	fprintf(stderr, "ERROR\n");
+}	// Function that returns Error. Error code was useful when determining what caused the error
+void deletion(struct Trie *curr, char *str, struct list **l) {
+	if (curr == NULL) {return;}
+	struct Trie *prev = curr;
+	int lastChar = *str - '0';
+	while (*str) {
+		prev = curr;
+		lastChar = *str - '0';
+		curr = curr->character[*str - '0'];
+		if (curr == NULL) {return;}
+		str++;
+	}
+	prev->character[lastChar] = NULL;
+	freeTrie(curr, l);
+}	// Deletes a Trie Node
 void reachEnd() {
 	while ((getchar()) != '\n') {}
 }	// Takes input till the end
@@ -136,12 +161,18 @@ unsigned long long int energyMedian(unsigned long long int energy1, unsigned lon
 	if (energy1 == NO_ENERGY || energy2 == NO_ENERGY) {return energy1 + energy2;}
 	return energy1 / 2 + energy2 / 2 + (energy1 % 2 + energy2 % 2) / 2;
 }	// Median
-int main2() {
+int main() {
+	struct list *l = NULL;
+	struct Trie *head = getNewTrieNode();
+	if (head == NULL) {return 1;}
 	char letter;
 	int option;
 	unsigned long long int energyInt, median;
 	bool valid;
+	struct Trie *t, *t1, *t2;
+	struct uNode *u, *u1, *u2;
 	char *arr = (char *) malloc(sizeof(char));
+	char *energy = (char *) malloc(sizeof(char));
 	char *firstWord = (char *) malloc(sizeof(char));
 	if (arr == NULL || energy == NULL || firstWord == NULL) {return 1;}
 	while ((letter = getchar()) != EOF) {
@@ -155,7 +186,6 @@ int main2() {
 		}
 		firstWord = getFirstWord(&letter, firstWord);
 		if (arr == NULL || energy == NULL || firstWord == NULL) {return 1;}
-
 		if (strcmp(firstWord, "DECLARE ") == NO_DIFF) {
 			valid = true;
 			arr = getOneArgument(&valid, arr);

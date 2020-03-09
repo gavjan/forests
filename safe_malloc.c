@@ -1,6 +1,11 @@
 #include "safe_malloc.h"
 #include <stdlib.h>
 
+void* safe_free(void* p) {
+	if(p!=NULL) free(p);
+	return NULL;
+}
+
 void* safe_malloc(size_t size) {
 	void* result=malloc(size);
 	if(!result)
