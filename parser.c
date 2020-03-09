@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "safe_malloc.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -9,7 +10,7 @@ void err() {
 char* pushArr(int i, char value, char* arr, size_t* capacity) {
 	if(i>(*capacity)-1) {
 		*capacity*=2;
-		arr=(char*)realloc(arr, sizeof(char)*(*capacity));
+		arr=safe_realloc(arr, sizeof(char)*(*capacity));
 	}
 	if(arr!=NULL) arr[i]=value;
 	return arr;
