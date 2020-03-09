@@ -53,6 +53,9 @@ int main() {
 		if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
 		if(command.type==UNRECOGNIZED) err();
 	}
-	free(line);
+	safe_free(command.forest);
+	safe_free(command.tree);
+	safe_free(command.animal);
+	safe_free(line);
 	exit(0);
 }

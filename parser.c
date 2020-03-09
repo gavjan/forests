@@ -1,5 +1,4 @@
 #include "parser.h"
-#include "safe_malloc.h"
 #include <stdio.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -19,16 +18,16 @@ bool startsWith(const char* pre, const char* str) {size_t lenpre=strlen(pre), le
 bool isproperchar(int c) {
 	return 33<=c && c<=255;
 }
-bool get_next_token(const char* line, size_t* start, char* token, size_t* capacity) {
+bool get_next_token(const char* line, size_t* start, char** token, size_t* capacity) {
 	(*start)++;
 	size_t pos=0;
 	while(!isspace(line[*start]) && line[*start]!='\0') {
 		if(!isproperchar(line[*start])) return false;
-		pushArr(pos,line[*start],token,capacity);
+		*token=pushArr(pos,line[*start],*token,capacity);
 		(*start)++;
 		pos++;
 	}
-	pushArr(pos,'\0',token,capacity);
+	*token=pushArr(pos,'\0',*token,capacity);
 	return pos!=0;
 }
 int checkFirstWord(const char* line, size_t line_length, int* first_word_length) {
@@ -47,15 +46,15 @@ Command parseCommand(char* line, size_t line_length, Command command) {
 	}
 	size_t start=first_word_length;
 	if(isspace(line[start])) {
-		if(!get_next_token(line, &start, command.forest, command.forest_capacity)) {command.type=UNRECOGNIZED; return command;}
+		if(!get_next_token(line, &start, &command.forest, command.forest_capacity)) {command.type=UNRECOGNIZED; return command;}
 		if(line[start]=='\0') {
 			return command;
 		}
-		if(!get_next_token(line, &start, command.tree, command.tree_capacity)) {command.type=UNRECOGNIZED; return command;}
+		if(!get_next_token(line, &start, &command.tree, command.tree_capacity)) {command.type=UNRECOGNIZED; return command;}
 		if(line[start]=='\0') {
 			return command;
 		}
-		if(!get_next_token(line, &start, command.animal, command.animal_capacity)) {command.type=UNRECOGNIZED; return command;}
+		if(!get_next_token(line, &start, &command.animal, command.animal_capacity)) {command.type=UNRECOGNIZED; return command;}
 		if(line[start]=='\0') return command;
 	}
 	command.type = UNRECOGNIZED;
