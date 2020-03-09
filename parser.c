@@ -4,10 +4,9 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <string.h>
-void err(int code) {
-	if(ERR_DEBUG) fprintf(stderr, "ERROR %d\n", code);
-	else fprintf(stderr, "ERROR\n");
-} //Error code was useful when determining what caused the error
+void err() {
+	fprintf(stderr, "ERROR\n");
+}
 char* pushArr(int i, char value, char* arr, size_t* capacity) {
 	if(i>(*capacity)-1) {
 		*capacity*=2;

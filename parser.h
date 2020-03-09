@@ -27,7 +27,7 @@ typedef struct command {
 		size_t* animal_capacity;
 } Command;
 // Function that writes ERROR.
-void err(int code);
+void err();
 
 // Recognize command it into tokens
 Command parseCommand(char* line, size_t line_length, Command command);
