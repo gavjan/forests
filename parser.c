@@ -30,7 +30,7 @@ bool get_next_token(const char* line, size_t* start, char* token, size_t* capaci
 		pos++;
 	}
 	pushArr(pos,'\0',token,capacity);
-	return pos;
+	return true;
 }
 int checkFirstWord(const char* line, size_t line_length, int* first_word_length) {
 	if(line_length<MIN_COMMAND_LENGTH) return UNRECOGNIZED;
