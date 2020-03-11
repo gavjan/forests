@@ -31,7 +31,7 @@ bool isspace_line(const char* line) {
 int main() {
 	size_t forest_capacity, tree_capacity, animal_capacity;
 	char* line=NULL;
-	Trie* trie_head=new_trie();
+	Trie* forests=new_trie();
 	size_t len=0;
 	size_t line_length;
 	Command command={
@@ -50,18 +50,17 @@ int main() {
 		if(isspace_line(line)) continue;
 		if(!line) err();
 		command = parseCommand(line, line_length, command);
-		printf("Command: %d\n", command.type);
-		if(*command.forest!='\0') printf("Forest: %s\n", command.forest);
-		if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
-		if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
+		//printf("Command: %d\n", command.type);
+		//if(*command.forest!='\0') printf("Forest: %s\n", command.forest);
+		//if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
+		//if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
 		if(command.type==UNRECOGNIZED) err();
-		else handle(command,&trie_head);
+		else handle(command,&forests);
 	}
 	safe_free(command.forest);
 	safe_free(command.tree);
 	safe_free(command.animal);
 	safe_free(line);
-	// Temporary
-	safe_free(trie_head);
+	safe_free(forests);
 	exit(0);
 }

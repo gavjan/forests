@@ -5,11 +5,12 @@
 Trie* new_trie() {
 	Trie* node=safe_malloc(sizeof(Trie));
 	node->is_word=false;
+	node->child=NULL;
 	for(int i=0; i<=CHAR_SIZE-1; i++)
 		node->character[i]=NULL;
 	return node;
 }
-void insert_trie(Trie* curr, char* str) {
+Trie* insert_trie(Trie* curr, char* str) {
 	while(*str) {
 		if(!curr->character[*str-'!']) {
 			curr->character[*str-'!']=new_trie();
@@ -18,6 +19,7 @@ void insert_trie(Trie* curr, char* str) {
 		str++;
 	}
 	curr->is_word=true;
+	return curr;
 }
 Trie* search_trie(Trie* head, char* str) {
 	if(!head || !str) {return NULL;}

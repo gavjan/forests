@@ -1,6 +1,7 @@
 #ifndef FORESTS_PARSER_H
 #define FORESTS_PARSER_H
 #include <stdlib.h>
+#include "trie.h"
 #define UNRECOGNIZED 0
 #define ADD 1
 #define DEL 2

@@ -1,23 +1,41 @@
 #include "handler.h"
 #include <stdio.h>
-void check_and_print(Trie** t, char* str) {
-	printf(search_trie(*t,str) ? "YES\n": "NO\n");
-}
 void exec_add(Command command, Trie** t) {
-	if(*command.forest!='\0') insert_trie(*t,command.forest);
-	if(*command.tree!='\0') insert_trie(*t,command.tree);
-	if(*command.animal!='\0') insert_trie(*t,command.animal);
+	Trie* node=NULL;
+	if(*command.forest!='\0') node=insert_trie(*t,command.forest);
+	if(node && !node->child) node->child=new_trie();
+	if(node && *command.tree!='\0') node=insert_trie(node->child,command.tree);
+	if(node && !node->child) node->child=new_trie();
+	if(node && *command.animal!='\0') insert_trie(node->child,command.animal);
+	printf("OK\n");
 }
 void exec_del(Command command, Trie** t) {
-
+	printf("OK\n");
 }
 void exec_print(Command command, Trie** t) {
 
 }
-void exec_check(Command command, Trie** t) {
-	if(*command.animal!='\0') check_and_print(t,command.animal);
-	else if(*command.tree!='\0') check_and_print(t,command.tree);
-	else if(*command.forest!='\0') check_and_print(t,command.forest);
+bool exec_check(Command command, Trie** t) {
+	Trie* node=NULL;
+	if(*command.animal!='\0') {
+		node=search_trie(*t,command.forest);
+		if(!node) return false;
+		node=search_trie(node->child,command.tree);
+		if(!node) return false;
+		return search_trie(node->child,command.animal);
+	}
+	else if(*command.tree!='\0') {
+		node=search_trie(*t,command.forest);
+		if(!node) return false;
+		return search_trie(node->child,command.tree);
+	}
+	else if(*command.forest!='\0') {
+		return search_trie(*t,command.forest);
+	}
+	return false;
+}
+void exec_check_print(Command command, Trie** t) {
+	printf(exec_check(command,t) ? "YES\n": "NO\n");
 }
 void handle(Command command, Trie** t) {
 	switch(command.type) {
@@ -31,7 +49,7 @@ void handle(Command command, Trie** t) {
 			exec_print(command,t);
 			break;
 		case CHECK:
-			exec_check(command,t);
+			exec_check_print(command,t);
 			break;
 	}
 }

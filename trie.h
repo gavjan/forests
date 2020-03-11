@@ -5,6 +5,7 @@
 
 typedef struct Trie {
 		struct Trie* character[CHAR_SIZE];
+		struct Trie* child;
 		bool is_word;
 } Trie; // A Trie node
 
@@ -12,7 +13,7 @@ typedef struct Trie {
 Trie* new_trie();
 
 // Insert a word in to the Trie.
-void insert_trie(Trie* curr, char* str);
+Trie* insert_trie(Trie* curr, char* str);
 
 // Check if a word is in the Trie; If yes return pointer to the last character NULL otherwise
 Trie* search_trie(Trie* head, char* str);
