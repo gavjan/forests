@@ -136,6 +136,33 @@ ref/fast:
 	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/build
 .PHONY : ref/fast
 
+handler.o: handler.c.o
+
+.PHONY : handler.o
+
+# target to build an object file
+handler.c.o:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/handler.c.o
+.PHONY : handler.c.o
+
+handler.i: handler.c.i
+
+.PHONY : handler.i
+
+# target to preprocess a source file
+handler.c.i:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/handler.c.i
+.PHONY : handler.c.i
+
+handler.s: handler.c.s
+
+.PHONY : handler.s
+
+# target to generate assembly for a file
+handler.c.s:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/handler.c.s
+.PHONY : handler.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -244,6 +271,33 @@ safe_malloc.c.s:
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/safe_malloc.c.s
 .PHONY : safe_malloc.c.s
 
+stack.o: stack.c.o
+
+.PHONY : stack.o
+
+# target to build an object file
+stack.c.o:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/stack.c.o
+.PHONY : stack.c.o
+
+stack.i: stack.c.i
+
+.PHONY : stack.i
+
+# target to preprocess a source file
+stack.c.i:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/stack.c.i
+.PHONY : stack.c.i
+
+stack.s: stack.c.s
+
+.PHONY : stack.s
+
+# target to generate assembly for a file
+stack.c.s:
+	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/stack.c.s
+.PHONY : stack.c.s
+
 trie.o: trie.c.o
 
 .PHONY : trie.o
@@ -281,6 +335,9 @@ help:
 	@echo "... forests"
 	@echo "... rebuild_cache"
 	@echo "... ref"
+	@echo "... handler.o"
+	@echo "... handler.i"
+	@echo "... handler.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -293,6 +350,9 @@ help:
 	@echo "... safe_malloc.o"
 	@echo "... safe_malloc.i"
 	@echo "... safe_malloc.s"
+	@echo "... stack.o"
+	@echo "... stack.i"
+	@echo "... stack.s"
 	@echo "... trie.o"
 	@echo "... trie.i"
 	@echo "... trie.s"

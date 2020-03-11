@@ -76,12 +76,12 @@ preinstall:
 CMakeFiles/forests.dir/all:
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/depend
 	$(MAKE) -f CMakeFiles/forests.dir/build.make CMakeFiles/forests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target forests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target forests"
 .PHONY : CMakeFiles/forests.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/forests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/forests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/forests.dir/rule
@@ -103,7 +103,7 @@ CMakeFiles/forests.dir/clean:
 CMakeFiles/ref.dir/all:
 	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/depend
 	$(MAKE) -f CMakeFiles/ref.dir/build.make CMakeFiles/ref.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target ref"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=8,9 "Built target ref"
 .PHONY : CMakeFiles/ref.dir/all
 
 # Build rule for subdir invocation for target.

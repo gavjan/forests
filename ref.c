@@ -31,7 +31,7 @@ void deletion(struct Trie *curr, char *str, struct list **l) {
 		str++;
 	}
 	prev->character[lastChar] = NULL;
-	freeTrie(curr, l);
+	free_trie(curr, l);
 }	// Deletes a Trie Node
 void reachEnd() {
 	while ((getchar()) != '\n') {}
@@ -163,7 +163,7 @@ unsigned long long int energyMedian(unsigned long long int energy1, unsigned lon
 }	// Median
 int main() {
 	struct list *l = NULL;
-	struct Trie *head = getNewTrieNode();
+	struct Trie *head =new_trie();
 	if (head == NULL) {return 1;}
 	char letter;
 	int option;
@@ -184,20 +184,20 @@ int main() {
 			reachEnd();
 			continue;
 		}
-		firstWord = getFirstWord(&letter, firstWord);
+		firstWord = getFirstWo	rd(&letter, firstWord);
 		if (arr == NULL || energy == NULL || firstWord == NULL) {return 1;}
 		if (strcmp(firstWord, "DECLARE ") == NO_DIFF) {
 			valid = true;
 			arr = getOneArgument(&valid, arr);
 			if (valid) {
-				insert(head, arr);
-				printf("OK\n");
+				insert_trie(head, arr);
+				printf("OK\n");hhb
 			} else {err(4);}
 		} else if (strcmp(firstWord, "VALID ") == NO_DIFF) {
 			valid = true;
 			arr = getOneArgument(&valid, arr);
 			if (valid) {
-				if (search(head, arr)) {printf("YES\n");}
+				if (search_trie(head, arr)) {printf("YES\n");}
 				else {printf("NO\n");}
 			} else {err(5);}
 		} else if (strcmp(firstWord, "REMOVE ") == NO_DIFF) {
@@ -214,14 +214,14 @@ int main() {
 				err(11);
 				continue;
 			}
-			t1 = search(head, arr);
+			t1 =search_trie(head, arr);
 			arr = (char *) realloc(arr, sizeof(char));
 			arr = getSecondArgumentOnly(&valid, arr);
 			if (!valid) {
 				err(11);
 				continue;
 			}
-			t2 = search(head, arr);
+			t2 =search_trie(head, arr);
 			if (t1 != NULL && t2 != NULL) {
 				if (t1 == t2) {	// EQUAL same history to itself
 					printf("OK\n");
@@ -252,7 +252,7 @@ int main() {
 				continue;
 			}
 			if (option == ONE_ARGUMENT) {
-				t = search(head, arr);
+				t =search_trie(head, arr);
 				if (t == NULL) {
 					err(8);
 					continue;
@@ -278,7 +278,7 @@ int main() {
 					err(10);
 					continue;
 				}
-				t = search(head, arr);
+				t =search_trie(head, arr);
 				if (t == NULL) {
 					err(8);
 					continue;
@@ -299,7 +299,7 @@ int main() {
 	free(firstWord);
 	free(arr);
 	free(energy);
-	if (!freeTrie(head, &l)) {return 1;}
+	if (!free_trie(head, &l)) {return 1;}
 	freeList(l);
 	return 0;
 } // Main to take input

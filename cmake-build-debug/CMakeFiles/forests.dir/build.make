@@ -83,9 +83,22 @@ CMakeFiles/forests.dir/trie.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/forests.dir/trie.c.s"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cgev/Desktop/CS/C/IPP/forests/trie.c -o CMakeFiles/forests.dir/trie.c.s
 
+CMakeFiles/forests.dir/stack.c.o: CMakeFiles/forests.dir/flags.make
+CMakeFiles/forests.dir/stack.c.o: ../stack.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/forests.dir/stack.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/forests.dir/stack.c.o   -c /home/cgev/Desktop/CS/C/IPP/forests/stack.c
+
+CMakeFiles/forests.dir/stack.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/forests.dir/stack.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cgev/Desktop/CS/C/IPP/forests/stack.c > CMakeFiles/forests.dir/stack.c.i
+
+CMakeFiles/forests.dir/stack.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/forests.dir/stack.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cgev/Desktop/CS/C/IPP/forests/stack.c -o CMakeFiles/forests.dir/stack.c.s
+
 CMakeFiles/forests.dir/safe_malloc.c.o: CMakeFiles/forests.dir/flags.make
 CMakeFiles/forests.dir/safe_malloc.c.o: ../safe_malloc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/forests.dir/safe_malloc.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/forests.dir/safe_malloc.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/forests.dir/safe_malloc.c.o   -c /home/cgev/Desktop/CS/C/IPP/forests/safe_malloc.c
 
 CMakeFiles/forests.dir/safe_malloc.c.i: cmake_force
@@ -98,7 +111,7 @@ CMakeFiles/forests.dir/safe_malloc.c.s: cmake_force
 
 CMakeFiles/forests.dir/parser.c.o: CMakeFiles/forests.dir/flags.make
 CMakeFiles/forests.dir/parser.c.o: ../parser.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/forests.dir/parser.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/forests.dir/parser.c.o"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/forests.dir/parser.c.o   -c /home/cgev/Desktop/CS/C/IPP/forests/parser.c
 
 CMakeFiles/forests.dir/parser.c.i: cmake_force
@@ -109,23 +122,40 @@ CMakeFiles/forests.dir/parser.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/forests.dir/parser.c.s"
 	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cgev/Desktop/CS/C/IPP/forests/parser.c -o CMakeFiles/forests.dir/parser.c.s
 
+CMakeFiles/forests.dir/handler.c.o: CMakeFiles/forests.dir/flags.make
+CMakeFiles/forests.dir/handler.c.o: ../handler.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/forests.dir/handler.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/forests.dir/handler.c.o   -c /home/cgev/Desktop/CS/C/IPP/forests/handler.c
+
+CMakeFiles/forests.dir/handler.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/forests.dir/handler.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cgev/Desktop/CS/C/IPP/forests/handler.c > CMakeFiles/forests.dir/handler.c.i
+
+CMakeFiles/forests.dir/handler.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/forests.dir/handler.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cgev/Desktop/CS/C/IPP/forests/handler.c -o CMakeFiles/forests.dir/handler.c.s
+
 # Object files for target forests
 forests_OBJECTS = \
 "CMakeFiles/forests.dir/main.c.o" \
 "CMakeFiles/forests.dir/trie.c.o" \
+"CMakeFiles/forests.dir/stack.c.o" \
 "CMakeFiles/forests.dir/safe_malloc.c.o" \
-"CMakeFiles/forests.dir/parser.c.o"
+"CMakeFiles/forests.dir/parser.c.o" \
+"CMakeFiles/forests.dir/handler.c.o"
 
 # External object files for target forests
 forests_EXTERNAL_OBJECTS =
 
 forests: CMakeFiles/forests.dir/main.c.o
 forests: CMakeFiles/forests.dir/trie.c.o
+forests: CMakeFiles/forests.dir/stack.c.o
 forests: CMakeFiles/forests.dir/safe_malloc.c.o
 forests: CMakeFiles/forests.dir/parser.c.o
+forests: CMakeFiles/forests.dir/handler.c.o
 forests: CMakeFiles/forests.dir/build.make
 forests: CMakeFiles/forests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable forests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable forests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/forests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

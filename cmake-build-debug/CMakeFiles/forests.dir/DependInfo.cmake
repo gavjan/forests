@@ -4,9 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/cgev/Desktop/CS/C/IPP/forests/handler.c" "/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles/forests.dir/handler.c.o"
   "/home/cgev/Desktop/CS/C/IPP/forests/main.c" "/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles/forests.dir/main.c.o"
   "/home/cgev/Desktop/CS/C/IPP/forests/parser.c" "/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles/forests.dir/parser.c.o"
   "/home/cgev/Desktop/CS/C/IPP/forests/safe_malloc.c" "/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles/forests.dir/safe_malloc.c.o"
+  "/home/cgev/Desktop/CS/C/IPP/forests/stack.c" "/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles/forests.dir/stack.c.o"
   "/home/cgev/Desktop/CS/C/IPP/forests/trie.c" "/home/cgev/Desktop/CS/C/IPP/forests/cmake-build-debug/CMakeFiles/forests.dir/trie.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

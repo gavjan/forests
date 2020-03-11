@@ -110,6 +110,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/handler.c">
+			<Option target="forests"/>
+		</Unit>
+		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/handler.h">
+			<Option target="forests"/>
+		</Unit>
 		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/main.c">
 			<Option target="forests"/>
 		</Unit>
@@ -126,6 +132,12 @@
 			<Option target="forests"/>
 		</Unit>
 		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/safe_malloc.h">
+			<Option target="forests"/>
+		</Unit>
+		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/stack.c">
+			<Option target="forests"/>
+		</Unit>
+		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/stack.h">
 			<Option target="forests"/>
 		</Unit>
 		<Unit filename="/home/cgev/Desktop/CS/C/IPP/forests/trie.c">

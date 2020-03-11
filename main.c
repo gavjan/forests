@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include "safe_malloc.h"
 #include "parser.h"
+#include "handler.h"
+#include "trie.h"
 #include <ctype.h>
 Command clear_tokens(Command command) {
 	command.forest=safe_realloc(command.forest,sizeof(char));
@@ -29,6 +31,7 @@ bool isspace_line(const char* line) {
 int main() {
 	size_t forest_capacity, tree_capacity, animal_capacity;
 	char* line=NULL;
+	Trie* trie_head=new_trie();
 	size_t len=0;
 	size_t line_length;
 	Command command={
@@ -52,10 +55,13 @@ int main() {
 		if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
 		if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
 		if(command.type==UNRECOGNIZED) err();
+		else handle(command,&trie_head);
 	}
 	safe_free(command.forest);
 	safe_free(command.tree);
 	safe_free(command.animal);
 	safe_free(line);
+	// Temporary
+	safe_free(trie_head);
 	exit(0);
 }
