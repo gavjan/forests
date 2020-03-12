@@ -12,18 +12,21 @@ char* pushArr(int i, char value, char* arr, size_t* capacity) {
 		*capacity*=2;
 		arr=safe_realloc(arr, sizeof(char)*(*capacity));
 	}
-	if(arr!=NULL) arr[i]=value;
+	if(arr) arr[i]=value;
 	return arr;
-}  // Set in i position of arr
-bool startsWith(const char* pre, const char* str) {size_t lenpre=strlen(pre), lenstr=strlen(str);return lenstr<lenpre ? false : memcmp(pre, str, lenpre)==0;}
-bool isproperchar(int c) {
+}
+bool startsWith(const char* pre, const char* str) {
+	size_t lenpre=strlen(pre), lenstr=strlen(str);
+	return lenstr<lenpre ? false : memcmp(pre, str, lenpre)==0;
+}
+bool is_proper_char(int c) {
 	return 33<=c && c<=255;
 }
 bool get_next_token(const char* line, size_t* start, char** token, size_t* capacity) {
-	(*start)++;
+	while(isspace(line[*start])) (*start)++;
 	size_t pos=0;
 	while(!isspace(line[*start]) && line[*start]!='\0') {
-		if(!isproperchar(line[*start])) return false;
+		if(!is_proper_char(line[*start])) return false;
 		*token=pushArr(pos,line[*start],*token,capacity);
 		(*start)++;
 		pos++;
@@ -42,9 +45,8 @@ int checkFirstWord(const char* line, size_t line_length, int* first_word_length)
 Command parseCommand(char* line, size_t line_length, Command command) {
 	int first_word_length=0;
 	command.type=checkFirstWord(line, line_length, &first_word_length);
-	if(line[first_word_length]=='\0' && (command.type==DEL || command.type==PRINT)) {
+	if(line[first_word_length]=='\0' && (command.type==DEL || command.type==PRINT))
 		return command;
-	}
 	size_t start=first_word_length;
 	if(isspace(line[start])) {
 		if(!get_next_token(line, &start, &command.forest, command.forest_capacity)) {command.type=UNRECOGNIZED; return command;}

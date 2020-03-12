@@ -22,15 +22,18 @@ bool exec_check(Command command, Trie** t) {
 		if(!node) return false;
 		node=search_trie(node->child,command.tree);
 		if(!node) return false;
-		return search_trie(node->child,command.animal);
+		node=search_trie(node->child,command.animal);
+		return node && node->is_word;
 	}
 	else if(*command.tree!='\0') {
 		node=search_trie(*t,command.forest);
 		if(!node) return false;
-		return search_trie(node->child,command.tree);
+		node=search_trie(node->child,command.tree);
+		return node && node->is_word;
 	}
 	else if(*command.forest!='\0') {
-		return search_trie(*t,command.forest);
+		node=search_trie(*t,command.forest);
+		return node && node->is_word;
 	}
 	return false;
 }

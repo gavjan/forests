@@ -51,9 +51,9 @@ int main() {
 		if(!line) err();
 		command = parseCommand(line, line_length, command);
 		//printf("Command: %d\n", command.type);
-		//if(*command.forest!='\0') printf("Forest: %s\n", command.forest);
-		//if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
-		//if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
+		if(*command.forest!='\0') printf("Forest: %s\n", command.forest);
+		if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
+		if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
 		if(command.type==UNRECOGNIZED) err();
 		else handle(command,&forests);
 	}
