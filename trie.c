@@ -2,6 +2,13 @@
 #include "stack.h"
 #include "safe_malloc.h"
 #include <stdlib.h>
+int children_count(Trie* t) {
+	int count=0;
+	if(!t) return count;
+	for(int i=0;i<CHAR_SIZE;i++)
+		if(t->character[i]) count++;
+	return count;
+}
 Trie* new_trie() {
 	Trie* node=safe_malloc(sizeof(Trie));
 	node->is_word=false;
@@ -50,13 +57,24 @@ Trie* free_trie(Trie* t) {
 }
 bool delete_trie(Trie* head, char* str) {
 	if(!head || !str) return false;
+	Trie* highest=head;
+	char to_delete=(char)(*str-'!');
 	Trie* curr=head;
 	while(*str) {
+		if(!curr->character[*str-'!']) return false;
+		if(children_count(curr)>1 || curr->is_word) {
+			highest=curr;
+			to_delete=(char)(*str-'!');
+		}
 		curr=curr->character[*str-'!'];
-		if(!curr) return NULL;
-		str++;
+		str++;			
 	}
 	curr->child=free_trie(curr->child);
 	curr->is_word=false;
+	if(highest->character[to_delete]==curr
+		&& children_count(curr)!=0)
+		return true;
+	highest->character[to_delete]=
+					free_trie(highest->character[to_delete]);
 	return true;
 }
