@@ -19,6 +19,8 @@ Trie* insert_trie(Trie* curr, char* str);
 Trie* search_trie(Trie* head, char* str);
 
 // Free Trie Node, return false if no memory available, true otherwise
-void free_trie(Trie* t);
+Trie* free_trie(Trie* t);
 
+// Delete a word from Trie
+bool delete_trie(Trie* head, char* str);
 #endif //FORESTS_TRIE_H

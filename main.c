@@ -61,6 +61,6 @@ int main() {
 	safe_free(command.tree);
 	safe_free(command.animal);
 	safe_free(line);
-	safe_free(forests);
+	free_trie(forests);
 	exit(0);
 }
