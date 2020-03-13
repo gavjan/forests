@@ -1,6 +1,7 @@
 #include "trie.h"
 #include "stack.h"
 #include "safe_malloc.h"
+#include <stdio.h>
 #include <stdlib.h>
 int children_count(Trie* t) {
 	int count=0;
@@ -39,6 +40,22 @@ Trie* search_trie(Trie* head, char* str) {
 	}
 	return curr;
 }
+void print_ordered_trie(Trie* t) {
+	if(!t) return;
+	Stack* s;
+	create_stack(&s);
+	push_stack(&s, t);
+	while(!is_empty_stack(s)) {
+		t=pop_stack(&s);
+		for(int i=0; i<=CHAR_SIZE-1; i++)
+			if(t->character[i]) {
+				if(t->character[i]->is_word)
+					printf("%c\n",'!'+i);
+				push_stack(&s, t->character[i]);
+			}
+	}
+	free_stack(&s);
+}
 Trie* free_trie(Trie* t) {
 	if(!t) return NULL;
 	Stack* s;
@@ -71,9 +88,9 @@ bool delete_trie(Trie* head, char* str) {
 	}
 	curr->child=free_trie(curr->child);
 	curr->is_word=false;
-	if(highest->character[to_delete]==curr
-		&& children_count(curr)!=0)
+	if(children_count(curr)!=0)
 		return true;
+
 	highest->character[to_delete]=
 					free_trie(highest->character[to_delete]);
 	return true;

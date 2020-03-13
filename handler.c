@@ -31,7 +31,21 @@ void exec_del(Command command, Trie** t) {
 	}
 }
 void exec_print(Command command, Trie** t) {
-
+	Trie* node;
+	if(*command.tree!='\0') {
+		node=search_trie(*t,command.forest);
+		if(!node) return;
+		node=search_trie(node->child,command.tree);
+		if(!node) return;
+		print_ordered_trie(node->child);
+	}
+	else if(*command.forest!='\0') {
+		node=search_trie(*t,command.forest);
+		if(!node) return;
+		print_ordered_trie(node->child);
+	}
+	else
+		print_ordered_trie(*t);
 }
 bool exec_check(Command command, Trie** t) {
 	Trie* node=NULL;
@@ -53,10 +67,10 @@ bool exec_check(Command command, Trie** t) {
 	if(node) return node->is_word;
 	return false;
 }
-void exec_check_print(Command command, Trie** t) {
+void exec_check_write(Command command, Trie** t) {
 	printf(exec_check(command,t) ? "YES\n": "NO\n");
 }
-void exec_del_print(Command command, Trie** t) {
+void exec_del_write(Command command, Trie** t) {
 	exec_del(command,t);
 	printf("OK\n");
 }
@@ -66,13 +80,13 @@ void handle(Command command, Trie** t) {
 			exec_add(command,t);
 			break;
 		case DEL:
-			exec_del_print(command,t);
+			exec_del_write(command, t);
 			break;
 		case PRINT:
 			exec_print(command,t);
 			break;
 		case CHECK:
-			exec_check_print(command,t);
+			exec_check_write(command, t);
 			break;
 	}
 }

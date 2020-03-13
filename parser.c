@@ -49,16 +49,25 @@ Command parseCommand(char* line, size_t line_length, Command command) {
 		return command;
 	size_t start=first_word_length;
 	if(isspace(line[start])) {
-		if(!get_next_token(line, &start, &command.forest, command.forest_capacity)) {command.type=UNRECOGNIZED; return command;}
-		if(line[start]=='\0') {
+		if(!get_next_token(line, &start, &command.forest, command.forest_capacity)) {
+			command.type=UNRECOGNIZED;
 			return command;
 		}
-		if(!get_next_token(line, &start, &command.tree, command.tree_capacity)) {command.type=UNRECOGNIZED; return command;}
-		if(line[start]=='\0') {
+		if(line[start]=='\0')
+			return command;
+		if(!get_next_token(line, &start, &command.tree, command.tree_capacity)) {
+			command.type=UNRECOGNIZED;
 			return command;
 		}
-		if(!get_next_token(line, &start, &command.animal, command.animal_capacity)) {command.type=UNRECOGNIZED; return command;}
-		if(line[start]=='\0') return command;
+		if(line[start]=='\0')
+			return command;
+		if(!get_next_token(line, &start, &command.animal, command.animal_capacity) ||
+			(command.type==PRINT && *command.animal!='\0')) {
+			command.type=UNRECOGNIZED;
+			return command;
+		}
+		if(line[start]=='\0')
+			return command;
 	}
 	command.type = UNRECOGNIZED;
 	return command;
