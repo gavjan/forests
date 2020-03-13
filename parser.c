@@ -7,14 +7,6 @@
 void err() {
 	fprintf(stderr, "ERROR\n");
 }
-char* pushArr(int i, char value, char* arr, size_t* capacity) {
-	if(i>(*capacity)-1) {
-		*capacity*=2;
-		arr=safe_realloc(arr, sizeof(char)*(*capacity));
-	}
-	if(arr) arr[i]=value;
-	return arr;
-}
 bool startsWith(const char* pre, const char* str) {
 	size_t lenpre=strlen(pre), lenstr=strlen(str);
 	return lenstr<lenpre ? false : memcmp(pre, str, lenpre)==0;

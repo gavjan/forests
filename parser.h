@@ -12,7 +12,6 @@
 #define DEL_LENGTH 3
 #define PRINT_LENGTH 5
 #define CHECK_LENGTH 5
-#define STARTING_SIZE 1
 
 // Structure for storing commands
 typedef struct command {

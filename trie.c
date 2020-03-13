@@ -21,10 +21,10 @@ Trie* new_trie() {
 Trie* insert_trie(Trie* curr, char* str) {
 	if(!curr) return NULL;
 	while(*str) {
-		if(!curr->character[*str-'!']) {
-			curr->character[*str-'!']=new_trie();
+		if(!curr->character[*str-START_CHAR]) {
+			curr->character[*str-START_CHAR]=new_trie();
 		}
-		curr=curr->character[*str-'!'];
+		curr=curr->character[*str-START_CHAR];
 		str++;
 	}
 	curr->is_word=true;
@@ -34,27 +34,31 @@ Trie* search_trie(Trie* head, char* str) {
 	if(!head || !str) return NULL;
 	Trie* curr=head;
 	while(*str) {
-		curr=curr->character[*str-'!'];
+		curr=curr->character[*str-START_CHAR];
 		if(!curr) return NULL;
 		str++;
 	}
 	return curr;
 }
+void print_rec(Trie* t, size_t pos,char** word,
+				size_t* capacity) {
+	if(t->is_word) {
+		*word=pushArr(pos,'\0',*word,capacity);
+		printf("%s\n",*word);
+	}
+	for(int i=0; i<CHAR_SIZE; i++) {
+		if(t->character[i]) {
+			*word=pushArr(pos, START_CHAR+i, *word, capacity);
+			print_rec(t->character[i],pos+1,word,capacity);
+		}
+	}
+}
 void print_ordered_trie(Trie* t) {
 	if(!t) return;
-	Stack* s;
-	create_stack(&s);
-	push_stack(&s, t);
-	while(!is_empty_stack(s)) {
-		t=pop_stack(&s);
-		for(int i=0; i<=CHAR_SIZE-1; i++)
-			if(t->character[i]) {
-				if(t->character[i]->is_word)
-					printf("%c\n",'!'+i);
-				push_stack(&s, t->character[i]);
-			}
-	}
-	free_stack(&s);
+	size_t capacity=STARTING_SIZE;
+	char* word=safe_malloc(sizeof(char));
+	print_rec(t,0,&word,&capacity);
+	word=safe_free(word);
 }
 Trie* free_trie(Trie* t) {
 	if(!t) return NULL;
@@ -75,15 +79,15 @@ Trie* free_trie(Trie* t) {
 bool delete_trie(Trie* head, char* str) {
 	if(!head || !str) return false;
 	Trie* highest=head;
-	char to_delete=(char)(*str-'!');
+	char to_delete=(char)(*str-START_CHAR);
 	Trie* curr=head;
 	while(*str) {
-		if(!curr->character[*str-'!']) return false;
+		if(!curr->character[*str-START_CHAR]) return false;
 		if(children_count(curr)>1 || curr->is_word) {
 			highest=curr;
-			to_delete=(char)(*str-'!');
+			to_delete=(char)(*str-START_CHAR);
 		}
-		curr=curr->character[*str-'!'];
+		curr=curr->character[*str-START_CHAR];
 		str++;			
 	}
 	curr->child=free_trie(curr->child);
