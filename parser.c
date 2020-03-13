@@ -19,11 +19,11 @@ bool get_next_token(const char* line, size_t* start, char** token, size_t* capac
 	size_t pos=0;
 	while(!isspace(line[*start]) && line[*start]!='\0') {
 		if(!is_proper_char(line[*start])) return false;
-		*token=pushArr(pos,line[*start],*token,capacity);
+		*token=push_arr(pos, line[*start], *token, capacity);
 		(*start)++;
 		pos++;
 	}
-	*token=pushArr(pos,'\0',*token,capacity);
+	*token=push_arr(pos, '\0', *token, capacity);
 	return pos!=0;
 }
 int checkFirstWord(const char* line, size_t line_length, int* first_word_length) {

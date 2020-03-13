@@ -13,6 +13,6 @@ extern void* safe_malloc(size_t size);
 extern void* safe_realloc(void* p, size_t size);
 
 // Push into dynamically resized string
-char* pushArr(int i, char value, char* arr, size_t* capacity);
+char* push_arr(int i, char value, char* arr, size_t* capacity);
 
 #endif //FORESTS_SAFE_MALLOC_H

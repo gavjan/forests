@@ -43,12 +43,12 @@ Trie* search_trie(Trie* head, char* str) {
 void print_rec(Trie* t, size_t pos,char** word,
 				size_t* capacity) {
 	if(t->is_word) {
-		*word=pushArr(pos,'\0',*word,capacity);
+		*word=push_arr(pos, '\0', *word, capacity);
 		printf("%s\n",*word);
 	}
 	for(int i=0; i<CHAR_SIZE; i++) {
 		if(t->character[i]) {
-			*word=pushArr(pos, START_CHAR+i, *word, capacity);
+			*word=push_arr(pos, START_CHAR+i, *word, capacity);
 			print_rec(t->character[i],pos+1,word,capacity);
 		}
 	}

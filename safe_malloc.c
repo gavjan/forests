@@ -18,7 +18,7 @@ void* safe_realloc(void* p, size_t size) {
 	}
 	return reallocated;
 }
-char* pushArr(int i, char value, char* arr, size_t* capacity) {
+char* push_arr(int i, char value, char* arr, size_t* capacity) {
 	if(i>(*capacity)-1) {
 		*capacity*=2;
 		arr=safe_realloc(arr, sizeof(char)*(*capacity));
