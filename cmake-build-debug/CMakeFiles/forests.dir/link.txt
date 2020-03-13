@@ -1,1 +1,0 @@
-/usr/bin/gcc -g   CMakeFiles/forests.dir/main.c.o CMakeFiles/forests.dir/trie.c.o CMakeFiles/forests.dir/stack.c.o CMakeFiles/forests.dir/safe_malloc.c.o CMakeFiles/forests.dir/parser.c.o CMakeFiles/forests.dir/handler.c.o  -o forests 

@@ -1,1 +1,0 @@
-/usr/bin/gcc -g   CMakeFiles/tempC.dir/main.c.o  -o tempC 
