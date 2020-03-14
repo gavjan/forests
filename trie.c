@@ -79,13 +79,13 @@ Trie* free_trie(Trie* t) {
 bool delete_trie(Trie* head, char* str) {
 	if(!head || !str) return false;
 	Trie* highest=head;
-	char to_delete=(char)(*str-START_CHAR);
+	size_t to_delete=*str-START_CHAR;
 	Trie* curr=head;
 	while(*str) {
 		if(!curr->character[*str-START_CHAR]) return false;
 		if(children_count(curr)>1 || curr->is_word) {
 			highest=curr;
-			to_delete=(char)(*str-START_CHAR);
+			to_delete=(*str-START_CHAR);
 		}
 		curr=curr->character[*str-START_CHAR];
 		str++;			

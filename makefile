@@ -1,24 +1,23 @@
-# Quantization makefile
-
+# forests makefile
 CC       ?= gcc
 CFLAGS   += -Wall -Wextra -std=c11 -O2
-OBJS = ufind.o trie.o stack.o main.o
+OBJS = trie.o stack.o safe_malloc.o parser.o handler.o main.o
 
 all: make
 
-run: make; ./quantization
+run: make; ./forests
 
 make: $(OBJS)
-	$(CC) $(CFLAGS) -o quantization src/ufind.c src/trie.c src/stack.c src/main.c
+	$(CC) $(CFLAGS) -o forests main.c trie.c trie.h stack.c stack.h safe_malloc.c safe_malloc.h parser.c parser.h handler.c handler.h
 
-$(OBJS): src/ufind.h src/trie.h src/stack.h
+$(OBJS): trie.h stack.h safe_malloc.h parser.h handler.h
 
-valgrind: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all ./quantization
+valgrind: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all ./forests
 
-valgrind_origin: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --track-origins=yes -v ./quantization
+valgrind_origin: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --track-origins=yes -v ./forests
 
-# For testing with binary 'quantization' and tests folder 'tests'
-test: make; ./test.sh quantization tests
+# For testing with binary file 'forests' and tests folder 'tests'
+test: make; ./test.sh forests tests
 
 clean:
-	-@$(RM) quantization *.out *.err *.o
+	-@$(RM) forests *.out *.err *.o

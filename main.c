@@ -1,4 +1,5 @@
 // [IPP] Małe Zadanie(Small Task), Gevorg Chobanyan 401929
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +34,7 @@ int main() {
 	char* line=NULL;
 	Trie* forests=new_trie();
 	size_t len=0;
-	size_t line_length;
+	int line_length;
 	Command command={
 					UNRECOGNIZED,
 					safe_malloc(sizeof(char)),

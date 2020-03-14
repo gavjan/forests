@@ -1,7 +1,7 @@
 #include "safe_malloc.h"
 #include <stdlib.h>
 void* safe_free(void* p) {
-	if(p!=NULL) free(p);
+	if(p) free(p);
 	return NULL;
 }
 void* safe_malloc(size_t size) {
@@ -18,7 +18,7 @@ void* safe_realloc(void* p, size_t size) {
 	}
 	return reallocated;
 }
-char* push_arr(int i, char value, char* arr, size_t* capacity) {
+char* push_arr(size_t i, char value, char* arr, size_t* capacity) {
 	if(i>(*capacity)-1) {
 		*capacity*=2;
 		arr=safe_realloc(arr, sizeof(char)*(*capacity));
