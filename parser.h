@@ -28,6 +28,6 @@ typedef struct command {
 void err();
 
 // Recognize command it into tokens
-Command parseCommand(char* line, size_t line_length, Command command);
+Command parse_command(char* line, size_t line_length, Command command);
 
 #endif //FORESTS_PARSER_H

@@ -49,7 +49,7 @@ int main() {
 		if(line[0]=='#') continue;
 		if(isspace_line(line)) continue;
 		if(!line) err();
-		command = parseCommand(line, line_length, command);
+		command =parse_command(line, line_length, command);
 		//printf("Command: %d\n", command.type);
 		if(*command.forest!='\0') printf("Forest: %s\n", command.forest);
 		if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
