@@ -1,5 +1,6 @@
 #include "handler.h"
 #include <stdio.h>
+#include <string.h>
 void exec_add(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(*command.forest!='\0') node=insert_trie(*t,command.forest);
@@ -47,8 +48,26 @@ void exec_print(Command command, Trie** t) {
 	else
 		print_ordered_trie(*t);
 }
+bool check_rec(Trie* t, char* str) {
+	bool ans=false;
+	if(t->is_word) {
+		ans=search_trie(t->child, str);
+	}
+	for(int i=0; i<CHAR_SIZE; i++)
+		if(t->character[i])
+			ans=ans || check_rec(t->character[i], str);
+	return ans;
+}
+bool check_star(Command command, Trie** t) {
+	if(*command.animal=='\0') // CHECK * a
+		return check_rec(*t, command.tree);
+}
+
 bool exec_check(Command command, Trie** t) {
 	Trie* node=NULL;
+	if(strcmp(command.tree,"*")==0 ||
+		strcmp(command.forest,"*")==0)
+		return check_star(command,t);
 	if(*command.animal!='\0') {
 		node=search_trie(*t,command.forest);
 		if(!node) return false;
