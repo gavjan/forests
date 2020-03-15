@@ -48,19 +48,57 @@ void exec_print(Command command, Trie** t) {
 	else
 		print_ordered_trie(*t);
 }
+
 bool check_rec(Trie* t, char* str) {
 	bool ans=false;
-	if(t->is_word) {
+	if(t->is_word)
 		ans=search_trie(t->child, str);
-	}
 	for(int i=0; i<CHAR_SIZE; i++)
 		if(t->character[i])
 			ans=ans || check_rec(t->character[i], str);
 	return ans;
 }
+bool check_rec_middle_star(Trie* t, char* str) {
+	bool ans=false;
+	if(t->is_word)
+		ans=check_rec(t->child, str);
+	for(int i=0; i<CHAR_SIZE; i++)
+		if(t->character[i])
+			ans=ans || check_rec_middle_star(
+							t->character[i],
+							str);
+	return ans;
+}
+bool check_rec_left_star(Trie* t, char* tree,
+				char* animal) {
+	bool ans=false;
+	if(t->is_word) {
+		Trie* node=search_trie(t->child, tree);
+		ans=node && search_trie(node->child,animal);
+	}
+	for(int i=0; i<CHAR_SIZE; i++)
+		if(t->character[i])
+			ans=ans || check_rec_left_star(
+							t->character[i],
+							tree, animal);
+	return ans;
+}
 bool check_star(Command command, Trie** t) {
 	if(*command.animal=='\0') // CHECK * a
 		return check_rec(*t, command.tree);
+	if(strcmp(command.forest,"*")==0 &&
+		strcmp(command.tree,"*")==0)
+		return check_rec_middle_star(*t, command.animal);
+	if(strcmp(command.tree,"*")==0) {
+		Trie* node=search_trie(*t, command.forest);
+		return node && check_rec(
+						node->child,
+						command.animal);
+	}
+	if(strcmp(command.forest,"*")==0) {
+		return check_rec_left_star(*t,command.tree,command.animal);
+	}
+	return false;
 }
 
 bool exec_check(Command command, Trie** t) {
