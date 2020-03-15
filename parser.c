@@ -28,10 +28,22 @@ bool get_next_token(const char* line, size_t* start, char** token, size_t* capac
 }
 int check_first_word(const char* line, size_t line_length, int* first_word_length) {
 	if(line_length<MIN_COMMAND_LENGTH) return UNRECOGNIZED;
-	if(startsWith("ADD", line)) {*first_word_length=ADD_LENGTH; return ADD;}
-	if(startsWith("DEL", line)) {*first_word_length=DEL_LENGTH; return DEL;}
-	if(startsWith("PRINT", line)) {*first_word_length=PRINT_LENGTH; return PRINT;}
-	if(startsWith("CHECK", line)) {*first_word_length=CHECK_LENGTH; return CHECK;}
+	if(startsWith("ADD", line)) {
+		*first_word_length=ADD_LENGTH;
+		return ADD;
+	}
+	if(startsWith("DEL", line)) {
+		*first_word_length=DEL_LENGTH;
+		return DEL;
+	}
+	if(startsWith("PRINT", line)) {
+		*first_word_length=PRINT_LENGTH;
+		return PRINT;
+	}
+	if(startsWith("CHECK", line)) {
+		*first_word_length=CHECK_LENGTH;
+		return CHECK;
+	}
 	return UNRECOGNIZED;
 }
 Command init_command(char* line, size_t line_length, Command command) {
@@ -54,14 +66,14 @@ Command init_command(char* line, size_t line_length, Command command) {
 		if(line[start]=='\0')
 			return command;
 		if(!get_next_token(line, &start, &command.animal, command.animal_capacity) ||
-			(command.type==PRINT && *command.animal!='\0')) {
+			 (command.type==PRINT && *command.animal!='\0')) {
 			command.type=UNRECOGNIZED;
 			return command;
 		}
 		if(line[start]=='\0')
 			return command;
 	}
-	command.type = UNRECOGNIZED;
+	command.type=UNRECOGNIZED;
 	return command;
 }
 Command parse_command(char* line, size_t line_length, Command command) {
@@ -72,11 +84,11 @@ Command parse_command(char* line, size_t line_length, Command command) {
 				command.type=UNRECOGNIZED;
 		}
 		else if(*command.tree!='\0') {
-			if(strcmp(command.tree,"*")==0)
+			if(strcmp(command.tree, "*")==0)
 				command.type=UNRECOGNIZED;
 		}
 		else if(*command.forest!='\0') {
-			if(strcmp(command.forest,"*")==0)
+			if(strcmp(command.forest, "*")==0)
 				command.type=UNRECOGNIZED;
 		}
 		else command.type=UNRECOGNIZED;

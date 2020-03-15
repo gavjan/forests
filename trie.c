@@ -2,11 +2,10 @@
 #include "stack.h"
 #include "safe_malloc.h"
 #include <stdio.h>
-#include <stdlib.h>
 int children_count(Trie* t) {
 	int count=0;
 	if(!t) return count;
-	for(int i=0;i<CHAR_SIZE;i++)
+	for(int i=0; i<CHAR_SIZE; i++)
 		if(t->character[i]) count++;
 	return count;
 }
@@ -40,16 +39,16 @@ Trie* search_trie(Trie* head, char* str) {
 	}
 	return curr;
 }
-void print_rec(Trie* t, size_t pos,char** word,
-				size_t* capacity) {
+void print_rec(Trie* t, size_t pos, char** word,
+							 size_t* capacity) {
 	if(t->is_word) {
 		*word=push_arr(pos, '\0', *word, capacity);
-		printf("%s\n",*word);
+		printf("%s\n", *word);
 	}
 	for(int i=0; i<CHAR_SIZE; i++) {
 		if(t->character[i]) {
 			*word=push_arr(pos, START_CHAR+i, *word, capacity);
-			print_rec(t->character[i],pos+1,word,capacity);
+			print_rec(t->character[i], pos+1, word, capacity);
 		}
 	}
 }
@@ -57,7 +56,7 @@ void print_ordered_trie(Trie* t) {
 	if(!t) return;
 	size_t capacity=STARTING_SIZE;
 	char* word=safe_malloc(sizeof(char));
-	print_rec(t,0,&word,&capacity);
+	print_rec(t, 0, &word, &capacity);
 	word=safe_free(word);
 }
 Trie* free_trie(Trie* t) {
@@ -88,7 +87,7 @@ bool delete_trie(Trie* head, char* str) {
 			to_delete=(*str-START_CHAR);
 		}
 		curr=curr->character[*str-START_CHAR];
-		str++;			
+		str++;
 	}
 	curr->child=free_trie(curr->child);
 	curr->is_word=false;
