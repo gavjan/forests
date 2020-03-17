@@ -1,20 +1,29 @@
-# forests makefile
-CC       ?= gcc
-CFLAGS   += -Wall -Wextra -std=c11 -O2
-OBJS = trie.o stack.o safe_malloc.o parser.o handler.o main.o
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c11 -O2
+LDFLAGS	=
 
-all: make
+.PHONY: all clean
+
+all: forests
+
+forests: main.o trie.o stack.o safe_malloc.o parser.o handler.o
+	$(CC) $(LDFLAGS) -o $@ $^
+trie.o: trie.c trie.h
+	$(CC) $(CFLAGS) -c $<
+stack.o: stack.c stack.h
+	$(CC) $(CFLAGS) -c $<
+safe_malloc.o: safe_malloc.c safe_malloc.h
+	$(CC) $(CFLAGS) -c $<
+parser.o: parser.c parser.h
+	$(CC) $(CFLAGS) -c $<
+handler.o: handler.c handler.h
+	$(CC) $(CFLAGS) -c $<
+main.o: main.c trie.h stack.h safe_malloc.h parser.h handler.h
+	$(CC) $(CFLAGS) -c $<
 
 run: make; ./forests
 
-make: $(OBJS)
-	$(CC) $(CFLAGS) -o forests main.c trie.c trie.h stack.c stack.h safe_malloc.c safe_malloc.h parser.c parser.h handler.c handler.h
-
-$(OBJS): trie.h stack.h safe_malloc.h parser.h handler.h
-
 valgrind: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all ./forests
-
-valgrind_origin: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all --track-origins=yes -v ./forests
 
 # For testing with binary file 'forests' and tests folder 'tests'
 test: make; ./test.sh forests tests
