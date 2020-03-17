@@ -21,7 +21,8 @@ Trie* insert_trie(Trie* curr, char* str) {
 	if(!curr) return NULL;
 	while(*str) {
 		if(!curr->character[*str-START_CHAR]) {
-			curr->character[*str-START_CHAR]=new_trie();
+			curr->character[*str-START_CHAR]=
+							new_trie();
 		}
 		curr=curr->character[*str-START_CHAR];
 		str++;
@@ -42,13 +43,16 @@ Trie* search_trie(Trie* head, char* str) {
 void print_rec(Trie* t, size_t pos, char** word,
 							 size_t* capacity) {
 	if(t->is_word) {
-		*word=push_arr(pos, '\0', *word, capacity);
+		*word=push_arr(pos, '\0', *word,
+						capacity);
 		printf("%s\n", *word);
 	}
 	for(int i=0; i<CHAR_SIZE; i++) {
 		if(t->character[i]) {
-			*word=push_arr(pos, START_CHAR+i, *word, capacity);
-			print_rec(t->character[i], pos+1, word, capacity);
+			*word=push_arr(pos, START_CHAR+i,
+							*word, capacity);
+			print_rec(t->character[i], pos+1,
+							word, capacity);
 		}
 	}
 }
@@ -81,7 +85,8 @@ bool delete_trie(Trie* head, char* str) {
 	size_t to_delete=*str-START_CHAR;
 	Trie* curr=head;
 	while(*str) {
-		if(!curr->character[*str-START_CHAR]) return false;
+		if(!curr->character[*str-START_CHAR])
+			return false;
 		if(children_count(curr)>1 || curr->is_word) {
 			highest=curr;
 			to_delete=(*str-START_CHAR);

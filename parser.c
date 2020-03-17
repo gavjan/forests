@@ -46,6 +46,11 @@ int check_first_word(const char* line, size_t line_length, int* first_word_lengt
 	}
 	return UNRECOGNIZED;
 }
+char* remove_useless_white_spaces(char* line, size_t last) {
+	while(isspace(line[last])) line[last--]='\0';
+	while(isspace(*line)) line++;
+	return line;
+}
 Command init_command(char* line, size_t line_length, Command command) {
 	int first_word_length=0;
 	command.type=check_first_word(line, line_length, &first_word_length);
@@ -77,6 +82,7 @@ Command init_command(char* line, size_t line_length, Command command) {
 	return command;
 }
 Command parse_command(char* line, size_t line_length, Command command) {
+	line=remove_useless_white_spaces(line, line_length-1);
 	command=init_command(line, line_length, command);
 	if(command.type==CHECK) {
 		if(*command.animal!='\0') {
