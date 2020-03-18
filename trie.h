@@ -3,6 +3,7 @@
 #define MISSING (-1)
 #include <stdbool.h>
 #include <stdint-gcc.h>
+
 typedef struct Trie {
 		char* index;
 		struct Trie** character;

@@ -51,9 +51,6 @@ int main() {
 		if(isspace_line(line)) continue;
 		if(!line) err();
 		command=parse_command(line, line_length, command);
-//		if(*command.forest!='\0') printf("Forest: %s\n", command.forest);
-//		if(*command.tree!='\0') printf("Tree: %s\n", command.tree);
-//		if(*command.animal!='\0') printf("Animal: %s\n", command.animal);
 		if(command.type==UNRECOGNIZED) err();
 		else handle(command, &forests);
 	}

@@ -26,7 +26,7 @@ char* push_arr(size_t i, char value, char* arr, size_t* capacity) {
 	if(arr) arr[i]=value;
 	return arr;
 }
-char* push_arr_index(uint8_t i, char value, char* arr, uint8_t * capacity) {
+char* push_arr_index(uint8_t i, char value, char* arr, uint8_t* capacity) {
 	if(i>(*capacity)-1) {
 		*capacity*=3;
 		arr=safe_realloc(arr, sizeof(char)*(*capacity));
