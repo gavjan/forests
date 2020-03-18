@@ -21,18 +21,18 @@ int sorted_insert(Trie* t, char c) {
 	while(i<r) {
 		t->character=push_arr_trie(
 						r, t->character[r-1],
-						t->character, t->trie_capacity);
+						t->character, &t->trie_capacity);
 		t->index=push_arr_index(
 						r, t->index[r-1],
-						t->index, t->index_capacity);
+						t->index, &t->index_capacity);
 		r--;
 	}
 	t->character=push_arr_trie(
 					i, new_trie(),
-					t->character, t->trie_capacity);
+					t->character, &t->trie_capacity);
 	t->index=push_arr_index(
 					i, c,
-					t->index, t->index_capacity);
+					t->index, &t->index_capacity);
 	t->size++;
 	return i;
 }
@@ -42,10 +42,10 @@ void shrink(Trie* t, int del_index) {
 	while(l<t->size-1) {
 		t->character=push_arr_trie(
 						l, t->character[l+1],
-						t->character, t->trie_capacity);
+						t->character, &t->trie_capacity);
 		t->index=push_arr_index(
 						l, t->index[l+1],
-						t->index, t->index_capacity);
+						t->index, &t->index_capacity);
 		l++;
 	}
 	t->character[t->size-1]=NULL;
@@ -56,12 +56,8 @@ Trie* new_trie() {
 	Trie* node=safe_malloc(sizeof(Trie));
 	node->is_word=false;
 	node->child=NULL;
-	node->trie_capacity=
-					safe_malloc(sizeof(uint8_t));
-	node->index_capacity=
-					safe_malloc(sizeof(uint8_t));
-	*node->trie_capacity=STARTING_SIZE;
-	*node->index_capacity=STARTING_SIZE;
+	node->trie_capacity=STARTING_SIZE;
+	node->index_capacity=STARTING_SIZE;
 	node->character=safe_malloc(sizeof(Trie*));
 	node->index=safe_malloc(sizeof(char));
 	node->size=0;
@@ -126,10 +122,6 @@ Trie* free_trie(Trie* t) {
 		for(int i=0; i<t->size; i++)
 			push_stack(&s, t->character[i]);
 		free_trie(t->child);
-		t->trie_capacity=
-						safe_free(t->trie_capacity);
-		t->index_capacity=
-						safe_free(t->index_capacity);
 		t->index=safe_free(t->index);
 		t->character=safe_free(t->character);
 		safe_free(t);

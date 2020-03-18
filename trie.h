@@ -9,8 +9,8 @@ typedef struct Trie {
 		struct Trie** character;
 		struct Trie* child;
 		bool is_word;
-		uint8_t* trie_capacity;
-		uint8_t* index_capacity;
+		uint8_t trie_capacity;
+		uint8_t index_capacity;
 		uint8_t size;
 } Trie; // A Trie node
 
