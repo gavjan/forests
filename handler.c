@@ -1,6 +1,7 @@
 #include "handler.h"
 #include <stdio.h>
 #include <string.h>
+// ADD command
 void exec_add(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(*command.forest!='\0') node=insert_trie(*t, command.forest);
@@ -10,6 +11,7 @@ void exec_add(Command command, Trie** t) {
 	if(node && *command.animal!='\0') insert_trie(node->child, command.animal);
 	printf("OK\n");
 }
+// DEL command
 void exec_del(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(*command.animal!='\0') {
@@ -31,6 +33,7 @@ void exec_del(Command command, Trie** t) {
 		*t=new_trie();
 	}
 }
+// PRINT command
 void exec_print(Command command, Trie** t) {
 	Trie* node;
 	if(*command.tree!='\0') {
@@ -48,6 +51,7 @@ void exec_print(Command command, Trie** t) {
 	else
 		print_ordered_trie(*t);
 }
+// Check * a
 bool check_rec(Trie* t, char* str) {
 	bool ans=false;
 	if(t->is_word)
@@ -57,6 +61,7 @@ bool check_rec(Trie* t, char* str) {
 			ans=ans || check_rec(t->character[i], str);
 	return ans;
 }
+// Check * * a
 bool check_rec_middle_star(Trie* t, char* str) {
 	bool ans=false;
 	if(t->is_word)
@@ -68,6 +73,7 @@ bool check_rec_middle_star(Trie* t, char* str) {
 							str);
 	return ans;
 }
+// Check * a a
 bool check_rec_left_star(Trie* t, char* tree,
 												 char* animal) {
 	bool ans=false;
@@ -82,23 +88,29 @@ bool check_rec_left_star(Trie* t, char* tree,
 							tree, animal);
 	return ans;
 }
+// Check commands with *
 bool check_star(Command command, Trie** t) {
-	if(*command.animal=='\0') // CHECK * a
+	// CHECK * a
+	if(*command.animal=='\0')
 		return check_rec(*t, command.tree);
+	// CHECK * * a
 	if(strcmp(command.forest, "*")==0 &&
 		 strcmp(command.tree, "*")==0)
 		return check_rec_middle_star(*t, command.animal);
+	// CHECK a * a
 	if(strcmp(command.tree, "*")==0) {
 		Trie* node=search_trie(*t, command.forest);
 		return node && check_rec(
 						node->child,
 						command.animal);
 	}
+	// CHECK * a a
 	if(strcmp(command.forest, "*")==0) {
 		return check_rec_left_star(*t, command.tree, command.animal);
 	}
 	return false;
 }
+// CHECK command
 bool exec_check(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(strcmp(command.tree, "*")==0 ||
@@ -122,9 +134,11 @@ bool exec_check(Command command, Trie** t) {
 	if(node) return node->is_word;
 	return false;
 }
+// CHECK command wrapper
 void exec_check_write(Command command, Trie** t) {
 	printf(exec_check(command, t) ? "YES\n" : "NO\n");
 }
+// DEL command wrapper
 void exec_del_write(Command command, Trie** t) {
 	exec_del(command, t);
 	printf("OK\n");

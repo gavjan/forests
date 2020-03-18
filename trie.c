@@ -3,15 +3,18 @@
 #include "safe_malloc.h"
 #include <stdio.h>
 #include <assert.h>
+// Return children count
 int children_count(Trie* t) {
 	return t->size;
 }
+// Get index of pointer for char c
 int get_index(Trie* t, char c) {
 	for(int i=0; i<t->size; i++)
 		if(t->index[i]==c)
 			return i;
 	return MISSING;
 }
+// Insert keeping the sorted order
 int sorted_insert(Trie* t, char c) {
 	int i;
 	for(i=0; i<t->size; i++)
@@ -36,6 +39,7 @@ int sorted_insert(Trie* t, char c) {
 	t->size++;
 	return i;
 }
+// Shrink to remove emtpy cell
 void shrink(Trie* t, int del_index) {
 	assert(t->character[del_index]==NULL);
 	int l=del_index;
@@ -90,6 +94,7 @@ Trie* search_trie(Trie* head, char* str) {
 	}
 	return curr;
 }
+// Recursively try to print the current word
 void print_rec(Trie* t, size_t pos, char** word,
 							 size_t* capacity) {
 	if(t->is_word) {

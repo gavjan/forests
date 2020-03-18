@@ -9,6 +9,7 @@
 #include "handler.h"
 #include "trie.h"
 #include <ctype.h>
+// Clear tokens and reset strings
 Command clear_tokens(Command command) {
 	command.forest=safe_realloc(command.forest, sizeof(char));
 	command.tree=safe_realloc(command.tree, sizeof(char));
@@ -21,6 +22,7 @@ Command clear_tokens(Command command) {
 	*command.animal_capacity=STARTING_SIZE;
 	return command;
 }
+// Check if line contains white spaces
 bool isspace_line(const char* line) {
 	int i=0;
 	while(line[i]) {

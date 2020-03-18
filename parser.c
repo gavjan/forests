@@ -7,13 +7,16 @@
 void err() {
 	fprintf(stderr, "ERROR\n");
 }
+// Check if a string is prefix of another
 bool startsWith(const char* pre, const char* str) {
 	size_t lenpre=strlen(pre), lenstr=strlen(str);
 	return lenstr<lenpre ? false : memcmp(pre, str, lenpre)==0;
 }
+// Check if a char meets the specifications
 bool is_proper_char(int c) {
 	return 33<=c && c<=255;
 }
+// Take next token
 bool get_next_token(const char* line, size_t* start, char** token, size_t* capacity) {
 	while(isspace(line[*start])) (*start)++;
 	size_t pos=0;
@@ -26,6 +29,7 @@ bool get_next_token(const char* line, size_t* start, char** token, size_t* capac
 	*token=push_arr(pos, '\0', *token, capacity);
 	return pos!=0;
 }
+// Recognize which command is called
 int check_first_word(const char* line, size_t line_length, int* first_word_length) {
 	if(line_length<MIN_COMMAND_LENGTH) return UNRECOGNIZED;
 	if(startsWith("ADD", line)) {
@@ -46,11 +50,13 @@ int check_first_word(const char* line, size_t line_length, int* first_word_lengt
 	}
 	return UNRECOGNIZED;
 }
+// Remove useless white space
 char* remove_useless_white_spaces(char* line, size_t last) {
 	while(isspace(line[last])) line[last--]='\0';
 	while(isspace(*line)) line++;
 	return line;
 }
+// Separate command into tokens correctly
 Command init_command(char* line, size_t line_length, Command command) {
 	int first_word_length=0;
 	command.type=check_first_word(line, line_length, &first_word_length);

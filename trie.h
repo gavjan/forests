@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdint-gcc.h>
 
+// Trie Node
 typedef struct Trie {
 		char* index;
 		struct Trie** character;
