@@ -1,13 +1,16 @@
 #ifndef FORESTS_TRIE_H
 #define FORESTS_TRIE_H
-#define CHAR_SIZE 223
-#define START_CHAR '!'
+#define MISSING (-1)
 #include <stdbool.h>
-
+#include <stdint-gcc.h>
 typedef struct Trie {
-		struct Trie* character[CHAR_SIZE];
+		char* index;
+		struct Trie** character;
 		struct Trie* child;
 		bool is_word;
+		uint8_t* trie_capacity;
+		uint8_t* index_capacity;
+		uint8_t size;
 } Trie; // A Trie node
 
 // Function that returns a new Trie node

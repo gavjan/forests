@@ -52,7 +52,7 @@ bool check_rec(Trie* t, char* str) {
 	bool ans=false;
 	if(t->is_word)
 		ans=search_trie(t->child, str);
-	for(int i=0; i<CHAR_SIZE; i++)
+	for(int i=0; i<t->size; i++)
 		if(t->character[i])
 			ans=ans || check_rec(t->character[i], str);
 	return ans;
@@ -61,7 +61,7 @@ bool check_rec_middle_star(Trie* t, char* str) {
 	bool ans=false;
 	if(t->is_word)
 		ans=check_rec(t->child, str);
-	for(int i=0; i<CHAR_SIZE; i++)
+	for(int i=0; i<t->size; i++)
 		if(t->character[i])
 			ans=ans || check_rec_middle_star(
 							t->character[i],
@@ -75,7 +75,7 @@ bool check_rec_left_star(Trie* t, char* tree,
 		Trie* node=search_trie(t->child, tree);
 		ans=node && search_trie(node->child, animal);
 	}
-	for(int i=0; i<CHAR_SIZE; i++)
+	for(int i=0; i<t->size; i++)
 		if(t->character[i])
 			ans=ans || check_rec_left_star(
 							t->character[i],

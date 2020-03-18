@@ -2,29 +2,86 @@
 #include "stack.h"
 #include "safe_malloc.h"
 #include <stdio.h>
+#include <assert.h>
 int children_count(Trie* t) {
-	int count=0;
-	if(!t) return count;
-	for(int i=0; i<CHAR_SIZE; i++)
-		if(t->character[i]) count++;
-	return count;
+	return t->size;
+	//int count=0;
+	//if(!t) return count;
+	//for(int i=0; i<CHAR_SIZE; i++)
+	//	if(t->character[i]) count++;
+	//return count;
+}
+int get_index(Trie* t,char c) {
+	for(int i=0;i<t->size;i++)
+		if(t->index[i]==c)
+			return i;
+	return MISSING;
+}
+int sorted_insert(Trie* t, char c) {
+	int i;
+	for(i=0; i<t->size; i++)
+		if(t->index[i]>c)
+			break;
+	int r=t->size;
+	while(i<r) {
+		t->character=push_arr_trie(
+						r, t->character[r-1],
+						t->character,t->trie_capacity);
+		t->index=push_arr_index(
+						r, t->index[r-1],
+						t->index,t->index_capacity);
+		r--;
+	}
+	t->character=push_arr_trie(
+					i, new_trie(),
+					t->character,t->trie_capacity);
+	t->index=push_arr_index(
+					i, c,
+					t->index,t->index_capacity);
+	t->size++;
+	return i;
+}
+void shrink(Trie* t,int del_index) {
+	assert(t->character[del_index]==NULL);
+	int l=del_index;
+	while(l<t->size-1) {
+		t->character=push_arr_trie(
+						l, t->character[l+1],
+						t->character,t->trie_capacity);
+		t->index=push_arr_index(
+						l, t->index[l+1],
+						t->index,t->index_capacity);
+		l++;
+	}
+	t->character[t->size-1]=NULL;
+	t->index[t->size-1]='\0';
+	t->size--;
 }
 Trie* new_trie() {
 	Trie* node=safe_malloc(sizeof(Trie));
 	node->is_word=false;
 	node->child=NULL;
-	for(int i=0; i<=CHAR_SIZE-1; i++)
-		node->character[i]=NULL;
+	node->trie_capacity=
+					safe_malloc(sizeof(uint8_t));
+	node->index_capacity=
+					safe_malloc(sizeof(uint8_t));
+	*node->trie_capacity=STARTING_SIZE;
+	*node->index_capacity=STARTING_SIZE;
+	node->character=safe_malloc(sizeof(Trie*));
+	node->index=safe_malloc(sizeof(char));
+	node->size=0;
+	node->character[0]=NULL;
+	node->index[0]='\0';
 	return node;
 }
 Trie* insert_trie(Trie* curr, char* str) {
 	if(!curr) return NULL;
+	int pos;
 	while(*str) {
-		if(!curr->character[*str-START_CHAR]) {
-			curr->character[*str-START_CHAR]=
-							new_trie();
-		}
-		curr=curr->character[*str-START_CHAR];
+		if((pos=get_index(curr,*str))==MISSING)
+			pos=sorted_insert(curr,*str);
+		assert(pos!=MISSING);
+		curr=curr->character[pos];
 		str++;
 	}
 	curr->is_word=true;
@@ -33,9 +90,11 @@ Trie* insert_trie(Trie* curr, char* str) {
 Trie* search_trie(Trie* head, char* str) {
 	if(!head || !str) return NULL;
 	Trie* curr=head;
+	int i;
 	while(*str) {
-		curr=curr->character[*str-START_CHAR];
-		if(!curr) return NULL;
+		i=get_index(curr,*str);
+		if(i==MISSING) return NULL;
+		curr=curr->character[i];
 		str++;
 	}
 	return curr;
@@ -47,13 +106,12 @@ void print_rec(Trie* t, size_t pos, char** word,
 						capacity);
 		printf("%s\n", *word);
 	}
-	for(int i=0; i<CHAR_SIZE; i++) {
-		if(t->character[i]) {
-			*word=push_arr(pos, START_CHAR+i,
-							*word, capacity);
-			print_rec(t->character[i], pos+1,
-							word, capacity);
-		}
+	for(int i=0; i<t->size; i++) {
+		*word=push_arr(pos, t->index[i],
+						*word, capacity);
+		print_rec(t->character[i], pos+1,
+						word, capacity);
+
 	}
 }
 void print_ordered_trie(Trie* t) {
@@ -70,10 +128,15 @@ Trie* free_trie(Trie* t) {
 	push_stack(&s, t);
 	while(!is_empty_stack(s)) {
 		t=pop_stack(&s);
-		for(int i=0; i<=CHAR_SIZE-1; i++)
-			if(t->character[i])
+		for(int i=0; i<t->size; i++)
 				push_stack(&s, t->character[i]);
 		free_trie(t->child);
+		t->trie_capacity=
+						safe_free(t->trie_capacity);
+		t->index_capacity=
+						safe_free(t->index_capacity);
+		t->index=safe_free(t->index);
+		t->character=safe_free(t->character);
 		safe_free(t);
 	}
 	free_stack(&s);
@@ -82,24 +145,27 @@ Trie* free_trie(Trie* t) {
 bool delete_trie(Trie* head, char* str) {
 	if(!head || !str) return false;
 	Trie* highest=head;
-	size_t to_delete=*str-START_CHAR;
+	char to_delete=*str;
 	Trie* curr=head;
+	int i;
 	while(*str) {
-		if(!curr->character[*str-START_CHAR])
+		i=get_index(curr,*str);
+		if(i==MISSING)
 			return false;
 		if(children_count(curr)>1 || curr->is_word) {
 			highest=curr;
-			to_delete=(*str-START_CHAR);
+			to_delete=*str;
 		}
-		curr=curr->character[*str-START_CHAR];
+		curr=curr->character[i];
 		str++;
 	}
 	curr->child=free_trie(curr->child);
 	curr->is_word=false;
 	if(children_count(curr)!=0)
 		return true;
-
-	highest->character[to_delete]=
-					free_trie(highest->character[to_delete]);
+	int del_index=get_index(highest,to_delete);
+	highest->character[del_index]=
+					free_trie(highest->character[del_index]);
+	shrink(highest,del_index);
 	return true;
 }

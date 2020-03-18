@@ -1,6 +1,7 @@
 #ifndef FORESTS_SAFE_MALLOC_H
 #define FORESTS_SAFE_MALLOC_H
 #include <stdlib.h>
+#include "trie.h"
 #define STARTING_SIZE 1
 
 // Safe free() wrapper
@@ -14,5 +15,11 @@ extern void* safe_realloc(void* p, size_t size);
 
 // Push into dynamically resized string
 char* push_arr(size_t i, char value, char* arr, size_t* capacity);
+
+// Push into dynamically resized index array
+char* push_arr_index(uint8_t i, char value, char* arr, uint8_t* capacity);
+
+// Push into dynamically resized pointer array
+Trie** push_arr_trie(uint8_t i, Trie* value, Trie** arr, uint8_t* capacity);
 
 #endif //FORESTS_SAFE_MALLOC_H

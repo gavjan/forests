@@ -21,12 +21,12 @@ handler.o: handler.c handler.h
 main.o: main.c trie.h stack.h safe_malloc.h parser.h handler.h
 	$(CC) $(CFLAGS) -c $<
 
-run: make; ./forests
+run: forests; ./forests
 
-valgrind: make; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all ./forests
+valgrind: forests; valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all ./forests
 
 # For testing with binary file 'forests' and tests folder 'tests'
-test: make; ./test.sh forests tests
+test: forests; ./test.sh forests tests
 
 clean:
-	-@$(RM) forests *.out *.err *.o
+	-@$(RM) forests *.out *.err *.o vgcore.*
