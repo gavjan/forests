@@ -8,15 +8,16 @@ void err() {
 	fprintf(stderr, "ERROR\n");
 }
 // Check if a string is prefix of another
-bool startsWith(const char* pre, const char* str) {
-	size_t lenpre=strlen(pre), lenstr=strlen(str);
-	return lenstr<lenpre ? false : memcmp(pre, str, lenpre)==0;
+static inline bool starts_with(const char* pre, const char* str) {
+	size_t len_pre=strlen(pre), len_str=strlen(str);
+	return len_pre>len_str ? false : memcmp(pre, str, len_pre)==0;
 }
 // Check if a char meets the specifications
-bool is_proper_char(int c) {
+static inline bool is_proper_char(int c) {
 	return 33<=c && c<=255;
 }
 // Take next token
+static inline
 bool get_next_token(const char* line, size_t* start, char** token, size_t* capacity) {
 	while(isspace(line[*start])) (*start)++;
 	size_t pos=0;
@@ -30,34 +31,35 @@ bool get_next_token(const char* line, size_t* start, char** token, size_t* capac
 	return pos!=0;
 }
 // Recognize which command is called
+static inline
 int check_first_word(const char* line, size_t line_length, int* first_word_length) {
 	if(line_length<MIN_COMMAND_LENGTH) return UNRECOGNIZED;
-	if(startsWith("ADD", line)) {
+	if(starts_with("ADD", line)) {
 		*first_word_length=ADD_LENGTH;
 		return ADD;
 	}
-	if(startsWith("DEL", line)) {
+	if(starts_with("DEL", line)) {
 		*first_word_length=DEL_LENGTH;
 		return DEL;
 	}
-	if(startsWith("PRINT", line)) {
+	if(starts_with("PRINT", line)) {
 		*first_word_length=PRINT_LENGTH;
 		return PRINT;
 	}
-	if(startsWith("CHECK", line)) {
+	if(starts_with("CHECK", line)) {
 		*first_word_length=CHECK_LENGTH;
 		return CHECK;
 	}
 	return UNRECOGNIZED;
 }
 // Remove useless white space
-char* remove_useless_white_spaces(char* line, size_t last) {
+static inline char* remove_useless_white_spaces(char* line, size_t last) {
 	while(isspace(line[last])) line[last--]='\0';
 	while(isspace(*line)) line++;
 	return line;
 }
 // Separate command into tokens correctly
-Command init_command(char* line, size_t line_length, Command command) {
+static inline Command init_command(char* line, size_t line_length, Command command) {
 	int first_word_length=0;
 	command.type=check_first_word(line, line_length, &first_word_length);
 	if(line[first_word_length]=='\0' && (command.type==DEL || command.type==PRINT))

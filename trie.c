@@ -4,10 +4,12 @@
 #include <stdio.h>
 #include <assert.h>
 // Return children count
+static inline
 int children_count(Trie* t) {
 	return t->size;
 }
 // Get index of pointer for char c
+static inline
 int get_index(Trie* t, char c) {
 	for(int i=0; i<t->size; i++)
 		if(t->index[i]==c)
@@ -15,6 +17,7 @@ int get_index(Trie* t, char c) {
 	return MISSING;
 }
 // Insert keeping the sorted order
+static inline
 int sorted_insert(Trie* t, char c) {
 	int i;
 	for(i=0; i<t->size; i++)
@@ -40,6 +43,7 @@ int sorted_insert(Trie* t, char c) {
 	return i;
 }
 // Shrink to remove emtpy cell
+static inline
 void shrink(Trie* t, int del_index) {
 	assert(t->character[del_index]==NULL);
 	int l=del_index;
@@ -95,6 +99,7 @@ Trie* search_trie(Trie* head, char* str) {
 	return curr;
 }
 // Recursively try to print the current word
+static inline
 void print_rec(Trie* t, size_t pos, char** word,
 							 size_t* capacity) {
 	if(t->is_word) {
@@ -144,7 +149,8 @@ bool delete_trie(Trie* head, char* str) {
 		i=get_index(curr, *str);
 		if(i==MISSING)
 			return false;
-		if(children_count(curr)>1 || curr->is_word) {
+		if(children_count(curr)>1 ||
+		curr->is_word) {
 			highest=curr;
 			to_delete=*str;
 		}
@@ -157,7 +163,8 @@ bool delete_trie(Trie* head, char* str) {
 		return true;
 	int del_index=get_index(highest, to_delete);
 	highest->character[del_index]=
-					free_trie(highest->character[del_index]);
+					free_trie(
+									highest->character[del_index]);
 	shrink(highest, del_index);
 	return true;
 }

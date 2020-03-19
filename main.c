@@ -10,7 +10,7 @@
 #include "trie.h"
 #include <ctype.h>
 // Clear tokens and reset strings
-Command clear_tokens(Command command) {
+static inline Command clear_tokens(Command command) {
 	command.forest=safe_realloc(command.forest, sizeof(char));
 	command.tree=safe_realloc(command.tree, sizeof(char));
 	command.animal=safe_realloc(command.animal, sizeof(char));
@@ -23,7 +23,7 @@ Command clear_tokens(Command command) {
 	return command;
 }
 // Check if line contains white spaces
-bool isspace_line(const char* line) {
+static inline bool isspace_line(const char* line) {
 	int i=0;
 	while(line[i]) {
 		if(!isspace(line[i])) return false;
