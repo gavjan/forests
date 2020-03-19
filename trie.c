@@ -150,7 +150,7 @@ bool delete_trie(Trie* head, char* str) {
 		if(i==MISSING)
 			return false;
 		if(children_count(curr)>1 ||
-		curr->is_word) {
+			 curr->is_word) {
 			highest=curr;
 			to_delete=*str;
 		}

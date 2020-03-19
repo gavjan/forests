@@ -75,7 +75,7 @@ static inline bool check_rec_middle_star(Trie* t, char* str) {
 }
 // Check * a a
 static inline bool check_rec_left_star(Trie* t, char* tree,
-												 char* animal) {
+																			 char* animal) {
 	bool ans=false;
 	if(t->is_word) {
 		Trie* node=search_trie(t->child, tree);
