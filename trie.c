@@ -99,7 +99,7 @@ Trie* search_trie(Trie* head, char* str) {
 	return curr;
 }
 // Recursively try to print the current word
-static inline
+static
 void print_rec(Trie* t, size_t pos, char** word,
 							 size_t* capacity) {
 	if(t->is_word) {

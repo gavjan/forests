@@ -17,7 +17,7 @@ static inline bool is_proper_char(int c) {
 	return 33<=c && c<=255;
 }
 // Take next token
-static inline
+static
 bool get_next_token(const char* line, size_t* start, char** token, size_t* capacity) {
 	while(isspace(line[*start])) (*start)++;
 	size_t pos=0;
@@ -59,7 +59,7 @@ static inline char* remove_useless_white_spaces(char* line, size_t last) {
 	return line;
 }
 // Separate command into tokens correctly
-static inline Command init_command(char* line, size_t line_length, Command command) {
+static Command init_command(char* line, size_t line_length, Command command) {
 	int first_word_length=0;
 	command.type=check_first_word(line, line_length, &first_word_length);
 	if(line[first_word_length]=='\0' && (command.type==DEL || command.type==PRINT))

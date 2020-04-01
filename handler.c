@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 // ADD command
-static inline void exec_add(Command command, Trie** t) {
+static void exec_add(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(*command.forest!='\0') node=insert_trie(*t, command.forest);
 	if(node && !node->child) node->child=new_trie();
@@ -12,7 +12,7 @@ static inline void exec_add(Command command, Trie** t) {
 	printf("OK\n");
 }
 // DEL command
-static inline void exec_del(Command command, Trie** t) {
+static void exec_del(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(*command.animal!='\0') {
 		node=search_trie(*t, command.forest);
@@ -34,7 +34,7 @@ static inline void exec_del(Command command, Trie** t) {
 	}
 }
 // PRINT command
-static inline void exec_print(Command command, Trie** t) {
+static void exec_print(Command command, Trie** t) {
 	Trie* node;
 	if(*command.tree!='\0') {
 		node=search_trie(*t, command.forest);
@@ -52,7 +52,7 @@ static inline void exec_print(Command command, Trie** t) {
 		print_ordered_trie(*t);
 }
 // Check * a
-static inline bool check_rec(Trie* t, char* str) {
+static bool check_rec(Trie* t, char* str) {
 	bool ans=false;
 	if(t->is_word)
 		ans=search_trie(t->child, str);
@@ -62,7 +62,7 @@ static inline bool check_rec(Trie* t, char* str) {
 	return ans;
 }
 // Check * * a
-static inline bool check_rec_middle_star(Trie* t, char* str) {
+static bool check_rec_middle_star(Trie* t, char* str) {
 	bool ans=false;
 	if(t->is_word)
 		ans=check_rec(t->child, str);
@@ -74,7 +74,7 @@ static inline bool check_rec_middle_star(Trie* t, char* str) {
 	return ans;
 }
 // Check * a a
-static inline bool check_rec_left_star(Trie* t, char* tree,
+static bool check_rec_left_star(Trie* t, char* tree,
 																			 char* animal) {
 	bool ans=false;
 	if(t->is_word) {
@@ -89,7 +89,7 @@ static inline bool check_rec_left_star(Trie* t, char* tree,
 	return ans;
 }
 // Check commands with *
-static inline bool check_star(Command command, Trie** t) {
+static bool check_star(Command command, Trie** t) {
 	// CHECK * a
 	if(*command.animal=='\0')
 		return check_rec(*t, command.tree);
@@ -111,7 +111,7 @@ static inline bool check_star(Command command, Trie** t) {
 	return false;
 }
 // CHECK command
-static inline bool exec_check(Command command, Trie** t) {
+static bool exec_check(Command command, Trie** t) {
 	Trie* node=NULL;
 	if(strcmp(command.tree, "*")==0 ||
 		 strcmp(command.forest, "*")==0)
@@ -135,11 +135,11 @@ static inline bool exec_check(Command command, Trie** t) {
 	return false;
 }
 // CHECK command wrapper
-static inline void exec_check_write(Command command, Trie** t) {
+static void exec_check_write(Command command, Trie** t) {
 	printf(exec_check(command, t) ? "YES\n" : "NO\n");
 }
 // DEL command wrapper
-static inline void exec_del_write(Command command, Trie** t) {
+static void exec_del_write(Command command, Trie** t) {
 	exec_del(command, t);
 	printf("OK\n");
 }
