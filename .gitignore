@@ -6,4 +6,4 @@ cmake-build-release/*
 # Project specific
 forests
 *.o
-test_diff.sh
+test_diff.shtests/
