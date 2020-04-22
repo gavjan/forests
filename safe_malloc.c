@@ -1,5 +1,6 @@
 #include "safe_malloc.h"
 #include <stdlib.h>
+#include <string.h>
 void* safe_free(void* p) {
 	if(p) free(p);
 	return NULL;
@@ -41,4 +42,7 @@ Trie** push_arr_trie(uint8_t i, Trie* value, Trie** arr, uint8_t* capacity) {
 	}
 	if(arr) arr[i]=value;
 	return arr;
+}
+int safe_strcmp(const char *s1, const char *s2) {
+	return strncmp(s1,s2,strlen(s2));
 }
