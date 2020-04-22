@@ -16,7 +16,7 @@ safe_malloc.o: safe_malloc.c safe_malloc.h trie.h stack.h
 	$(CC) $(CFLAGS) -c $<
 parser.o: parser.c parser.h trie.h safe_malloc.h
 	$(CC) $(CFLAGS) -c $<
-handler.o: handler.c handler.h parser.h
+handler.o: handler.c handler.h parser.h safe_malloc.h
 	$(CC) $(CFLAGS) -c $< 
 main.o: main.c parser.h handler.h trie.h safe_malloc.h
 	$(CC) $(CFLAGS) -c $<

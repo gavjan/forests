@@ -1,4 +1,5 @@
 #include "handler.h"
+#include "safe_malloc.h"
 #include <stdio.h>
 #include <string.h>
 // ADD command
@@ -94,18 +95,18 @@ static bool check_star(Command command, Trie** t) {
 	if(*command.animal=='\0')
 		return check_rec(*t, command.tree);
 	// CHECK * * a
-	if(strcmp(command.forest, "*")==0 &&
-		 strcmp(command.tree, "*")==0)
+	if(safe_strcmp(command.forest, "*")==0 &&
+		 safe_strcmp(command.tree, "*")==0)
 		return check_rec_middle_star(*t, command.animal);
 	// CHECK a * a
-	if(strcmp(command.tree, "*")==0) {
+	if(safe_strcmp(command.tree, "*")==0) {
 		Trie* node=search_trie(*t, command.forest);
 		return node && check_rec(
 						node->child,
 						command.animal);
 	}
 	// CHECK * a a
-	if(strcmp(command.forest, "*")==0) {
+	if(safe_strcmp(command.forest, "*")==0) {
 		return check_rec_left_star(*t, command.tree, command.animal);
 	}
 	return false;
@@ -113,8 +114,8 @@ static bool check_star(Command command, Trie** t) {
 // CHECK command
 static bool exec_check(Command command, Trie** t) {
 	Trie* node=NULL;
-	if(strcmp(command.tree, "*")==0 ||
-		 strcmp(command.forest, "*")==0)
+	if(safe_strcmp(command.tree, "*")==0 ||
+		 safe_strcmp(command.forest, "*")==0)
 		return check_star(command, t);
 	if(*command.animal!='\0') {
 		node=search_trie(*t, command.forest);

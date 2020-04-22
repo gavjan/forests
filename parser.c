@@ -94,15 +94,15 @@ Command parse_command(char* line, size_t line_length, Command command) {
 	command=init_command(line, line_length, command);
 	if(command.type==CHECK) {
 		if(*command.animal!='\0') {
-			if(strcmp(command.animal, "*")==0)
+			if(safe_strcmp(command.animal, "*")==0)
 				command.type=UNRECOGNIZED;
 		}
 		else if(*command.tree!='\0') {
-			if(strcmp(command.tree, "*")==0)
+			if(safe_strcmp(command.tree, "*")==0)
 				command.type=UNRECOGNIZED;
 		}
 		else if(*command.forest!='\0') {
-			if(strcmp(command.forest, "*")==0)
+			if(safe_strcmp(command.forest, "*")==0)
 				command.type=UNRECOGNIZED;
 		}
 		else command.type=UNRECOGNIZED;
