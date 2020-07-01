@@ -1,7 +1,11 @@
-# forests
-First project for the subject Individual programming project
+# Forests
+## Description
 
-To build and run the executable:
+
+
+
+
+To build and run the executable `forests`:
 ```
 make run
 ```
