@@ -8,17 +8,17 @@ all: forests
 
 forests: main.o trie.o stack.o safe_malloc.o parser.o handler.o
 	$(CC) $(LDFLAGS) -o $@ $^
-trie.o: trie.c trie.h safe_malloc.h stack.h
+trie.o: src/trie.c src/trie.h src/safe_malloc.h src/stack.h
 	$(CC) $(CFLAGS) -c $<
-stack.o: stack.c stack.h trie.h safe_malloc.h
+stack.o: src/stack.c src/stack.h src/trie.h src/safe_malloc.h
 	$(CC) $(CFLAGS) -c $<
-safe_malloc.o: safe_malloc.c safe_malloc.h trie.h stack.h
+safe_malloc.o: src/safe_malloc.c src/safe_malloc.h src/trie.h src/stack.h
 	$(CC) $(CFLAGS) -c $<
-parser.o: parser.c parser.h trie.h safe_malloc.h
+parser.o: src/parser.c src/parser.h src/trie.h src/safe_malloc.h
 	$(CC) $(CFLAGS) -c $<
-handler.o: handler.c handler.h parser.h safe_malloc.h
+handler.o: src/handler.c src/handler.h src/parser.h src/safe_malloc.h
 	$(CC) $(CFLAGS) -c $< 
-main.o: main.c parser.h handler.h trie.h safe_malloc.h
+main.o: src/main.c src/parser.h src/handler.h src/trie.h src/safe_malloc.h
 	$(CC) $(CFLAGS) -c $<
 
 run: forests
